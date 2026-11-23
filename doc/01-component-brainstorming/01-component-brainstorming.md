@@ -1,12 +1,11 @@
 # Portfolio Part 1: Component Brainstorming
 
-- **Name**: <!-- TODO: fill with first and last name (e.g., Brutus Buckeye) then delete this comment -->
-- **Dot Number**: <!-- TODO: fill with OSU dot number (e.g., buckeye.17) then delete this comment -->
-- **Due Date**: <!-- TODO: fill with due date and time (e.g., 10/17 @ 3:10 PM EST) then delete this comment -->
+- **Name**: Christopher Ma
+- **Dot Number**: ma.2853
+- **Due Date**: 12/9 @1:50 PM EST
 
 ## Assignment Overview
 
-<!-- TODO: read the assignment overview then delete this comment -->
 
 The overall goal of the portfolio project is to have you design and implement
 your own OSU component. There are no limits to what you choose to design and
@@ -29,7 +28,6 @@ implement.
 
 ## Assignment Checklist
 
-<!-- TODO: browse the checklist then delete this comment -->
 
 To be sure you have completed everything on this assignment, we have littered
 this document with TODO comments. You can browse all of them in VSCode by
@@ -52,7 +50,6 @@ to the tree diagram (you may remove this one as well):
 
 ## Assignment Learning Objectives
 
-<!-- TODO: read the assignment learning objectives then delete this comment -->
 
 Without learning objectives, there really is no clear reason why a particular
 assessment or activity exists. Therefore, to be completely transparent, here is
@@ -67,7 +64,6 @@ project. Specifically, students should be able to:
 
 ## Assignment Rubric: 10 Points
 
-<!-- TODO: read the assignment rubric then delete this comment -->
 
 Again, to be completely transparent, most of the portfolio project, except the
 final submission, is designed as a formative assessment. Formative assessments
@@ -106,15 +102,11 @@ Below is further rationale/explanation for the rubric items above:
 > brainstorming. Plus it helps us get to know you better! Feel free to share
 > images in this section.
 
-<!-- TODO: briefly talk about your interests then delete this comment.
-Also, protip: you can preview what your response looks like by hitting
-the magnifying glass icon in the upper-right corner or pressing CTRL+K and
-then V. This kind of button combination is called a chord, for whatever
-reason -->
+Some of my hobbies are snowboarding in the winter, so far I have only been to local ski resorts however plan on traveling more and visiting larger, more popular mountains. I also enjoy playing basketball, I've been playing since I was in 1st grade all the way up until highschool. Fishing is another hobby, I mainly fish freshwater, since I'm from Illinois not many options there, I mainly fish bass however I have caught various different species ranging from catfish to sturgeon. I'm a pretty active person, I workout 5 days a week, and get 10k steps daily, it's really important to me that I stay active due to some heath condition I have.
+As far as career goals go, I am not entirely sure yet. There are many ideas in the CS field that are really cool to me and that I really want to work and develop. What some of the defense companies are working on are very intresting, for example the Anduril vr glasses that allow the user to see a person through walls. And obviously AI, I think it can be a very powerful tool when implemented in the correct fields.
 
 ## Assignment
 
-<!-- TODO: read the assignment section then delete this comment -->
 
 As previously stated, you are tasked with brainstorming 3 possible components.
 To aid you in this process, we have provided [some example components][example-components]
@@ -122,7 +114,6 @@ that may help you in your brainstorming. All of these components were made at
 some point by one of your peers, so you should feel confident that you can
 accomplish any of them.
 
-<!-- TODO: browse the list of possible projects then delete this comment -->
 
 There is no requirement that you use any of the components listed above.
 If you want to model something else, go for it! Very common early object
@@ -143,7 +134,6 @@ about different ways you might allow a client to manipulate your component.
 
 ### Example Component
 
-<!-- TODO: review this example component then delete this comment -->
 
 To help you brainstorm a few components, we've provided an example below of a
 component you already know well: NaturalNumber. We highly recommend that you
@@ -211,26 +201,35 @@ will likely refine your design to make your implementation easier to use.
 
 > Please use this section to share your designs.
 
-- Component Design #1: <!-- TODO: give component a name then delete this comment -->
+- Component Design #1: SnowboardRider
   - **Description**:
-    - <!-- TODO: describe your component then delete this comment -->
+    - Mdoels a snowboarding session as an ordered log of runs. Each run records the trail name, difficulty, top speed, whether it was a park run, number of toe side and heel side turns, and the turn style(skidded, carved, or a mix of both). The kernel adds, removes, and counts runs; the secondary interface computes stats like max speed, runs per difficulty, edge balance, and how many runs were carved.
   - **Kernel Methods**:
-    - <!-- TODO: list kernel methods then delete this comment -->
+    - 'void addRun(SnowboardRider.Run r)' adds 'r' to the end of 'this'.
+    - 'SnowboardRider.Run removeRun()' removes and returns the most recent run in 'this'
+    - 'int length()' returns the number of runs in 'this'
   - **Secondary Methods**:
-    - <!-- TODO: list secondary methods then delete this comment -->
+    - 'double maxSpeed()' returns the highest speed of the run
+    - 'double averageSpeed()'returns the average speed of the run
+    - 'int parkRuns()' returns how many runs were in the park
+    - 'intTotalTurns()' returns the total amount of turns across all runs, including both heel and toe side
+    - 'double toeHeelRatio()' returns the total toe side turns divided by the total heel side turns and shows which side the rider prefers more
+    - 'int carvedRuns() returns how many runs in which the rider was carving instead of using skidded turns
+    - 'void append(SnowbaordRider other)' moves all runs from 'other' to the end of 'this'.
+    - 'String toString()' lists every run in order
   - **Additional Considerations** (*note*: "I don't know" is an acceptable
     answer for each of the following questions):
     - Would this component be mutable? Answer and explain:
       - <!-- TODO: provide an argument then delete this comment -->
     - Would this component rely on any internal classes (e.g., `Map.Pair`)?
       Answer and explain:
-      - <!-- TODO: provide an argument then delete this comment -->
+      - Yes, a SnowBoardRider.Run class holds the trail name, difficulty, top speed, park flag, toe side turn count, heel side turn count, and turn style. This class is immutable, thus no aliasing problems occu when runs are returned.
     - Would this component need any enums or constants (e.g.,
       `Program.Instruction`)? Answer and explain:
-      - <!-- TODO: provide an argument then delete this comment -->
+      - Yes, two enums difficulty and turn style.
     - Can you implement your secondary methods using your kernel methods?
       Answer, explain, and give at least one example:
-      - <!-- TODO: provide an argument then delete this comment -->
+      - Yes, every secondary method calls 'removeRun()', to read what's needed from each run, then calls 'addRun()' to add it back so its in original order. For example 'carvedRuns' uses the same loop and counts the number of runs whose style is carved.
 
 - Component Design #2: <!-- TODO: give component a name then delete this comment -->
   - **Description**:
