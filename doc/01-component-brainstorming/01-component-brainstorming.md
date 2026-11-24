@@ -220,7 +220,7 @@ will likely refine your design to make your implementation easier to use.
   - **Additional Considerations** (*note*: "I don't know" is an acceptable
     answer for each of the following questions):
     - Would this component be mutable? Answer and explain:
-      - <!-- TODO: provide an argument then delete this comment -->
+      - Yes, 'addRun' and 'removeRun' would change the log
     - Would this component rely on any internal classes (e.g., `Map.Pair`)?
       Answer and explain:
       - Yes, a SnowBoardRider.Run class holds the trail name, difficulty, top speed, park flag, toe side turn count, heel side turn count, and turn style. This class is immutable, thus no aliasing problems occu when runs are returned.
@@ -231,47 +231,85 @@ will likely refine your design to make your implementation easier to use.
       Answer, explain, and give at least one example:
       - Yes, every secondary method calls 'removeRun()', to read what's needed from each run, then calls 'addRun()' to add it back so its in original order. For example 'carvedRuns' uses the same loop and counts the number of runs whose style is carved.
 
-- Component Design #2: <!-- TODO: give component a name then delete this comment -->
+- Component Design #2: 'Matrix'
   - **Description**:
-    - <!-- TODO: describe your component then delete this comment -->
+    - Models a 2D matrix of real numbers with a fixed number of rows and
+      columns. The kernel handles only dimensions and reading/writing single
+      entries. The secondary interface adds linear algebra operations like
+      addition, multiplication, and transpose.
   - **Kernel Methods**:
-    - <!-- TODO: list kernel methods then delete this comment -->
+    - `void setDimensions(int rows, int cols)`, changes `this` to
+      `rows` x `cols` with every value set to 0
+    - `double entry(int r, int c)`, returns the entry at row `r`, column `c`
+    - `void setEntry(int r, int c, double value)`, sets the entry at row `r`,
+      column `c` to `value`
+    - `int rows()`, returns the number of rows
+    - `int columns()`, returns the number of columns
   - **Secondary Methods**:
-    - <!-- TODO: list secondary methods then delete this comment -->
+    - `void add(Matrix m)`, adds `m` to `this` entry by entry (same dimensions
+      required)
+    - `void subtract(Matrix m)`, subtracts `m` from `this`
+    - `void scale(double k)`, multiplies every entry by `k`
+    - `void multiply(Matrix m)`, replaces `this` with `this * m`
+      (`this.columns() == m.rows()` required)
+    - `void transpose()`, replaces `this` with its transpose
+    - `boolean isSquare()`, returns whether rows equals columns
+    - `double determinant()`, returns the determinant (square matrices only)
   - **Additional Considerations** (*note*: "I don't know" is an acceptable
     answer for each of the following questions):
     - Would this component be mutable? Answer and explain:
-      - <!-- TODO: provide an argument then delete this comment -->
+      - Yes, inherits methods like 'setEntry' and 'setDimensions'.
     - Would this component rely on any internal classes (e.g., `Map.Pair`)?
       Answer and explain:
-      - <!-- TODO: provide an argument then delete this comment -->
+      - No, the methods work with ints and doubles.
     - Would this component need any enums or constants (e.g.,
       `Program.Instruction`)? Answer and explain:
-      - <!-- TODO: provide an argument then delete this comment -->
+      - I don't know
     - Can you implement your secondary methods using your kernel methods?
       Answer, explain, and give at least one example:
-      - <!-- TODO: provide an argument then delete this comment -->
+      - Yes, 'transpose' creates a temporary matrix with `setDimensions(columns(), rows())` copy each `entry(r, c)` into `setEntry(c, r, ...)`, then `transferFrom` the temp into `this`.
 
-- Component Design #3: <!-- TODO: give component a name then delete this comment -->
+- Component Design #3: 'WorkoutLog'
   - **Description**:
-    - <!-- TODO: describe your component then delete this comment -->
+    - Models a workout log that groups sets (reps x weight) by exercise name.
+      The kernel stores and removes sets per exercise. The secondary interface
+      calculates training stats like total volume, personal records,
+      estimated one-rep max, and progressive overload.
   - **Kernel Methods**:
-    - <!-- TODO: list kernel methods then delete this comment -->
+    - `void addSet(String exercise, int reps, double weight)`: records a set
+      under `exercise`
+    - `WorkoutLog.Set removeSet(String exercise)`: removes and returns the
+      earliest set for `exercise` (requires at least one set); if it was the
+      last set, `exercise` is removed from `this`
+    - `int setCount(String exercise)`: reports the number of sets for
+      `exercise` (0 if none)
+    - `String anyExercise()`: reports some exercise in `this` (requires
+      `this` to be non-empty)
+    - `int exerciseCount()`: reports the number of distinct exercises
   - **Secondary Methods**:
-    - <!-- TODO: list secondary methods then delete this comment -->
+    - `double volume(String exercise)`, returns the sum of reps x weight for
+      `exercise`
+    - `double totalVolume()`, returns total volume across all exercises
+    - `double personalRecord(String exercise)`, returns the heaviest weight
+      lifted for `exercise`
+    - `double estimatedOneRepMax(String exercise)`, returns the best estimated
+      1RM using the Epley formula, `weight * (1 + reps / 30)`
+    - `int totalSets()`, returns the number of sets across all exercises
   - **Additional Considerations** (*note*: "I don't know" is an acceptable
     answer for each of the following questions):
     - Would this component be mutable? Answer and explain:
-      - <!-- TODO: provide an argument then delete this comment -->
+      - Yes, `addSet` and `removeSet` change `this`.
     - Would this component rely on any internal classes (e.g., `Map.Pair`)?
       Answer and explain:
-      - <!-- TODO: provide an argument then delete this comment -->
+      - Yes, an immutable `WorkoutLog.Set` class holds reps and weight.
     - Would this component need any enums or constants (e.g.,
       `Program.Instruction`)? Answer and explain:
-      - <!-- TODO: provide an argument then delete this comment -->
+      - A constant for the 1RM estimate, something like 'EPLEY_DIVISOR = 30'
     - Can you implement your secondary methods using your kernel methods?
       Answer, explain, and give at least one example:
-      - <!-- TODO: provide an argument then delete this comment -->
+      - Yes, `volume(exercise)`, loop `setCount(exercise)` times, call
+        `removeSet(exercise)`, add `reps * weight` to a running total, then
+        `addSet` it back. Sets cycle back in order, so the log is restored.
 
 ## Post-Assignment
 
@@ -280,7 +318,6 @@ completed the assignment.
 
 ### Changelog
 
-<!-- TODO: create CHANGELOG then delete this comment -->
 
 At the end of every assignment, you should update the
 [CHANGELOG.md](../../CHANGELOG.md) file found in the root of the project folder.
@@ -319,7 +356,6 @@ of development.
 
 ### Submission
 
-<!-- TODO: read the submission instructions then delete this comment -->
 
 If you have completed the assignment using this template, we recommend that
 you convert it to a PDF before submission. If you're not sure how, check out
@@ -329,11 +365,9 @@ all your work is there before submitting. For future assignments, you will
 just be submitting a link to a pull request. This will be the only time
 you have to submit any PDFs.
 
-<!-- TODO: upload a PDF of this document and the CHANGELOG to Carmen then delete this comment -->
 
 ### Peer Review
 
-<!-- TODO: review the peer review guidelines then delete this comment -->
 
 Following the completion of this assignment, you will be assigned three
 students' component brainstorming assignments for review. Your job during the
@@ -360,7 +394,6 @@ If you'd like to give feedback for this assignment (or any assignment, really),
 make use of [this survey][survey]. Your feedback helps make assignments
 better for future students.
 
-<!-- TODO: follow the link to share your feedback then delete this comment -->
 
 [example-components]: https://therenegadecoder.com/code/the-never-ending-list-of-small-programming-project-ideas/
 [markdown-to-pdf-guide]: https://therenegadecoder.com/blog/how-to-convert-markdown-to-a-pdf-3-quick-solutions/
