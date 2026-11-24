@@ -33,7 +33,7 @@ public class Matrix {
         this.entries[r][c] = value;
     }
 
-    public int row() {
+    public int rows() {
         return this.entries.length;
     }
 
@@ -45,14 +45,13 @@ public class Matrix {
         return columns;
     }
 
-
     /*
-    * Secondary Methods
-    */
+     * Secondary Methods
+     */
 
     public void add(Matrix m) {
         for (int r = 0; r < this.rows(); r++) {
-            for(int c = ; c < this.columns(); c++) {
+            for (int c = 0; c < this.columns(); c++) {
                 this.setEntry(r, c, this.entry(r, c) + m.entry(r, c));
             }
         }
@@ -61,10 +60,10 @@ public class Matrix {
     public Matrix multiply(Matrix m) {
         Matrix product = new Matrix(this.rows(), this.columns());
         for (int r = 0; r < this.rows(); r++) {
-            for (int c = ; c < this.columns(); c++) {
+            for (int c = 0; c < this.columns(); c++) {
                 double sum = 0;
-                for(int i = 0; i < this.columns(); i++) {
-                    sum += this.ntry(r, k) * m.entry(k, c);
+                for (int i = 0; i < this.columns(); i++) {
+                    sum += this.entry(r, c) * m.entry(i, c);
                 }
                 product.setEntry(r, c, sum);
             }
@@ -76,18 +75,20 @@ public class Matrix {
     @Override
     public String toString() {
         String result = "";
-        for(int r = 0; r < this.rows(); r++) {
+        for (int r = 0; r < this.rows(); r++) {
             result += "[";
-            for(int c = 0; c < this.columns(); c++) {
+            for (int c = 0; c < this.columns(); c++) {
                 result += String.format("%6.1f", this.entry(r, c));
             }
-            result += "]\n"
+            result += "]\n";
         }
+
+        return result;
     }
 
     /*
-    * main method, client view
-    */
+     * main method, client view
+     */
     public static void main(String[] args) {
         Matrix a = new Matrix(2, 2);
         a.setEntry(0, 0, 1);
