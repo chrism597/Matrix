@@ -1,3 +1,6 @@
+/**
+ * {@code MatrixKernel} enhanced with secondary methods.
+ */
 public interface Matrix extends MatrixKernel {
 
     /**
@@ -73,7 +76,7 @@ public interface Matrix extends MatrixKernel {
 
     /**
      * Scalar multiplication. Multiplies every entry of {@code this} by
-     * {@code k}.
+     * {@code scalar}.
      *
      * @param scalar
      *            the scalar to multiply by
