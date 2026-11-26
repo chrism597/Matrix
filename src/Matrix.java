@@ -72,7 +72,7 @@ public interface Matrix extends MatrixKernel {
      *          [for every r, c, the entry at row c and column c of this = this
      *          entry at row c and column r of #this]
      */
-    void tranpose();
+    void transpose();
 
     /**
      * Scalar multiplication. Multiplies every entry of {@code this} by
