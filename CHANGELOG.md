@@ -6,7 +6,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Calendar Versioning](https://calver.org/) of
 the following form: YYYY.0M.0D.
 
-## 2026.111.25
+## 2026.11.26
+
+### Added
+
+- Designed abstract class for Matrix component
+- Implemented all secondary and common methods using only kernel and Standard methods
+
+## 2026.11.25
 
 ### Added
 
