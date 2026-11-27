@@ -8,6 +8,10 @@ the following form: YYYY.0M.0D.
 
 ## 2026.11.26
 
+## Added
+
+- Designed kernel implementation for MAtrix component using a 2D array of doubles 'double[][]' representation with stored row and column counts
+
 ### Added
 
 - Designed abstract class for Matrix component
