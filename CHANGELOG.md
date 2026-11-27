@@ -8,12 +8,14 @@ the following form: YYYY.0M.0D.
 
 ## 2026.11.26
 
+## 2026.11.25
+
 ### Added
 
 - Designed abstract class for Matrix component
 - Implemented all secondary and common methods using only kernel and Standard methods
 
-## 2026.11.25
+## 2026.11.24
 
 ### Added
 
