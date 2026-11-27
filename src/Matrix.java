@@ -44,14 +44,14 @@ public interface Matrix extends MatrixKernel {
     void matrixMultiplication(Matrix m);
 
     /**
-     * Calulates the determinant of {@code this}.
+     * Calculates the determinant of {@code this}.
      *
      * @return the determinant of {@code this}
-     * @requires this.rows() = this.columns() and this.rows() > 0
-     * @ensures [if this is 1 x 1, determinant = this(0, 0); otherwise,
-     *          determinant = the sum over every column c of (-1)^c * this(0, c)
-     *          * the determinant of the matrix formed by removing row 0 and
-     *          column c from this]
+     * @requires this.rows() = this.columns()
+     * @ensures [if this is 0 x 0, determinant = 1; otherwise, determinant = the
+     *          sum over every column c of (-1)^c * this(0, c) * (the
+     *          determinant of the matrix formed by removing row 0 and column c
+     *          from this)]
      */
     double determinant();
 

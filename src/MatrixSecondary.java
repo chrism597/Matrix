@@ -6,7 +6,7 @@
  */
 public abstract class MatrixSecondary implements Matrix {
     @Override
-    public void matrixAddition(Matrix m) {
+    public final void matrixAddition(Matrix m) {
         assert m != null : "Violation of: m is not null";
         assert this.rows() == m.rows() && this.columns() == m
                 .columns() : "Violation of this and m having the same dimensions";
@@ -19,7 +19,7 @@ public abstract class MatrixSecondary implements Matrix {
     }
 
     @Override
-    public void matrixSubtraction(Matrix m) {
+    public final void matrixSubtraction(Matrix m) {
         assert m != null : "Violation of m is not null";
         assert this.rows() == m.rows() && this.columns() == m
                 .columns() : "Violation of this and m having the same dimensions";
@@ -32,7 +32,7 @@ public abstract class MatrixSecondary implements Matrix {
     }
 
     @Override
-    public void matrixMultiplication(Matrix m) {
+    public final void matrixMultiplication(Matrix m) {
         assert m != null : "Violation of m is not null";
         assert this.columns() == m
                 .rows() : "Violation of this.columns() = m.rows()";
@@ -53,23 +53,21 @@ public abstract class MatrixSecondary implements Matrix {
     }
 
     @Override
-    public double determinant() {
-        assert this.isSquare() && this
-                .rows() > 0 : "Violation of this is a non-empty matrix and a square matrix";
+    public final double determinant() {
+        assert this.isSquare() : "Violation of: this is a square matrix";
 
-        int row = this.rows();
-        double determinant = 0;
+        int n = this.rows();
+        double determinant = 1;
 
-        if (row == 1) {
-            determinant = this.entry(0, 0);
-        } else {
+        if (n > 0) {
+            determinant = 0;
             double sign = 1;
-            for (int c = 0; c < row; c++) {
+            for (int c = 0; c < n; c++) {
                 Matrix subMatrix = this.newInstance();
-                subMatrix.setDimensions(row - 1, row - 1);
-                for (int i = 1; i < row; i++) {
+                subMatrix.setDimensions(n - 1, n - 1);
+                for (int i = 1; i < n; i++) {
                     int subMatrixColumn = 0;
-                    for (int j = 0; j < row; j++) {
+                    for (int j = 0; j < n; j++) {
                         if (j != c) {
                             subMatrix.setEntry(i - 1, subMatrixColumn,
                                     this.entry(i, j));
@@ -86,7 +84,7 @@ public abstract class MatrixSecondary implements Matrix {
     }
 
     @Override
-    public void transpose() {
+    public final void transpose() {
         Matrix transposeMatrix = this.newInstance();
         transposeMatrix.setDimensions(this.columns(), this.rows());
         for (int i = 0; i < this.rows(); i++) {
@@ -98,12 +96,12 @@ public abstract class MatrixSecondary implements Matrix {
     }
 
     @Override
-    public boolean isSquare() {
+    public final boolean isSquare() {
         return this.rows() == this.columns();
     }
 
     @Override
-    public void scalarMultiplication(double scalar) {
+    public final void scalarMultiplication(double scalar) {
         for (int i = 0; i < this.rows(); i++) {
             for (int j = 0; j < this.columns(); j++) {
                 this.setEntry(i, j, scalar * this.entry(i, j));
@@ -112,7 +110,7 @@ public abstract class MatrixSecondary implements Matrix {
     }
 
     @Override
-    public boolean isSymmetric() {
+    public final boolean isSymmetric() {
         boolean symmetric = this.isSquare();
         for (int i = 0; i < this.rows() && symmetric; i++) {
             for (int j = i + 1; j < this.columns() && symmetric; j++) {
@@ -167,7 +165,7 @@ public abstract class MatrixSecondary implements Matrix {
     }
 
     @Override
-    public int hashCode() {
+    public final int hashCode() {
         int hash = this.rows() * this.columns();
         for (int i = 0; i < this.rows(); i++) {
             for (int j = 0; j < this.columns(); j++) {
